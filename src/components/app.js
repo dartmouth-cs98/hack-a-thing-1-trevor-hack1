@@ -3,38 +3,16 @@ import {
   BrowserRouter as Router,
   Route, Switch, NavLink,
 } from 'react-router-dom';
-import Counter from '../containers/counter';
-import Controls from '../containers/controls';
+import SignIn from './signin';
+import Encrypt from './encrypt';
 
 const App = () => {
-  const About = () => {
-    return (
-      <div>
-        All there is to know about me
-        <Counter />
-        <Controls />
-      </div>
-    );
-  };
-
   const Welcome = () => {
     return (
       <div>
         Welcome
-        <Counter />
-        <Controls />
       </div>
 
-    );
-  };
-
-  const Test = (props) => {
-    return (
-      <div>
-        ID: {props.match.params.id};
-        <Counter />
-        <Controls />
-      </div>
     );
   };
 
@@ -42,8 +20,6 @@ const App = () => {
     return (
       <div>
         URL Not Found
-        <Counter />
-        <Controls />
       </div>
     );
   };
@@ -53,9 +29,8 @@ const App = () => {
       <nav>
         <ul>
           <li><NavLink to="/" exact>Home</NavLink></li>
-          <li><NavLink to="/about" exact>About</NavLink></li>
-          <li><NavLink to="/test/id1">test id1</NavLink></li>
-          <li><NavLink to="/test/id2">test id2</NavLink></li>
+          <li><NavLink to="/encrypt" exact>Encrypt</NavLink></li>
+          <li><NavLink to="/signin">Sign In</NavLink></li>
         </ul>
       </nav>
     );
@@ -66,8 +41,8 @@ const App = () => {
         <Nav />
         <Switch>
           <Route exact path="/" component={Welcome} />
-          <Route path="/about" component={About} />
-          <Route exact path="/test/:id" component={Test} />
+          <Route path="/encrypt" component={Encrypt} />
+          <Route exact path="/signin" component={SignIn} />
           <Route component={FallBack} />
         </Switch>
       </div>

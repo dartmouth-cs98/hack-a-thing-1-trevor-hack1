@@ -1,18 +1,28 @@
 // keys for actiontypes
 export const ActionTypes = {
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
+  SIGNIN: 'SIGNIN',
+  SIGNUP: 'SIGNUP',
+  SIGNOUT: 'SIGNOUT',
+  AUTH_ERROR: 'AUTH_ERROR',
 };
 
 
-export function increment() {
+export function signInUser() {
   return {
-    type: ActionTypes.INCREMENT,
+    type: ActionTypes.SIGNIN,
     payload: null,
   };
 }
 
-export function decrement() {
+export function signUpUser() {
+  return {
+    type: ActionTypes.SIGNUP,
+    payload: null,
+  };
+}
+
+
+export function signOutUser() {
   return {
     type: ActionTypes.DECREMENT,
     payload: null,
