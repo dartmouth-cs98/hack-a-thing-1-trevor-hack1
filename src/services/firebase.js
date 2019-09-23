@@ -13,7 +13,7 @@ const config = {
 firebase.initializeApp(config);
 
 // Get a reference to the database service
-const database = firebase.database();
+const db = firebase.database();
 
 
 // Adapted from from https://github.com/firebase/quickstart-js/blob/c677a47085e1afb2516d51ab1bb54cad362afdc7/auth/email-password.html#L95-L107
@@ -76,17 +76,20 @@ export function signUpUser(email, password) {
   });
   // [END createwithemail]
 }
-export function fetchKey(callback) {
-  database.ref('notes').on('value', (snapshot) => {
-    const newNoteState = snapshot.val();
-    callback(newNoteState);
-  });
-}
-export function createKey(note) {
-  const { key } = database.ref('notes').push(note);
-  database.ref('notes').child(key).update({ id: key });
+export function createKey(hash, key) {
+  db.ref('keys').child(hash).set({ key });
 }
 
-export function deleteKey(id) {
-  database.ref('notes').child(id).remove();
+function deleteKey(hash) {
+  db.ref('keys').child(hash).remove();
+}
+
+export function fetchKey(hash, callback) {
+  db.ref('keys').child(hash).once('value', (snapshot) => {
+    if (snapshot.exists()) {
+      deleteKey(hash);
+      callback(snapshot.toJSON().key);
+    }
+    return null;
+  });
 }

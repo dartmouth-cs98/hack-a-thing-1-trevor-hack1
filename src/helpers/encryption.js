@@ -1,8 +1,10 @@
 
+import * as db from '../services/firebase';
 
-const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,()?!$\'|';
+const Hashes = require('jshashes');
+
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,()?!$\'"|';
 const charactersLength = characters.length;
-let key = '';
 
 // Modified from https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
 function generateKey(length) {
@@ -14,19 +16,36 @@ function generateKey(length) {
 }
 
 export function encrypt(message) {
-  key = generateKey(message.length);
+  const key = generateKey(message.length);
   let encryptedMessage = '';
+  let hashValue = 0;
   for (let i = 0; i < message.length; i += 1) {
     const c = message.charAt(i);
     const d = key.charAt(i);
     const encryptValue = (characters.indexOf(c) + characters.indexOf(d)) % charactersLength;
+    hashValue += encryptValue;
     encryptedMessage += characters.substr(encryptValue, 1);
   }
-
+  const MD5 = new Hashes.MD5();
+  const hash = MD5.hex(encryptedMessage.substr(0, 1) + hashValue + encryptedMessage.substr(encryptedMessage.length - 1, 1));
+  db.createKey(hash, key);
   return encryptedMessage;
 }
 
 export function decrypt(code) {
+  let hashValue = 0;
+  for (let i = 0; i < code.length; i += 1) {
+    const c = code.charAt(i);
+    hashValue += characters.indexOf(c);
+  }
+  const MD5 = new Hashes.MD5();
+  const hash = MD5.hex(code.substr(0, 1) + hashValue + code.substr(code.length - 1, 1));
+
+  const key = db.fetchKey(hash);
+
+  if (!key) {
+    return 'Message does not have a key or has already been deciphered';
+  }
   let decryptedMessage = '';
   for (let i = 0; i < code.length; i += 1) {
     const c = code.charAt(i);
@@ -34,6 +53,5 @@ export function decrypt(code) {
     const decryptValue = (characters.indexOf(c) - characters.indexOf(d)) % charactersLength;
     decryptedMessage += characters.substr(decryptValue, 1);
   }
-
   return decryptedMessage;
 }
