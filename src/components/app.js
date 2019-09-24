@@ -19,6 +19,7 @@ const App = () => {
     <Router>
       <div className="main-page">
         <Switch>
+          <Route path="/" component={Encrypt} />
           <Route path="/encrypt" component={Encrypt} />
           <Route component={FallBack} />
         </Switch>
