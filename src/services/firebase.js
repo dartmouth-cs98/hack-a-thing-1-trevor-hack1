@@ -28,7 +28,8 @@ export function fetchKey(hash, callback) {
     if (snapshot.exists()) {
       deleteKey(hash);
       callback(snapshot.toJSON().key);
+    } else {
+      callback(null);
     }
-    return null;
   });
 }

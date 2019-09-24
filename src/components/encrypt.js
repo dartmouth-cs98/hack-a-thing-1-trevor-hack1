@@ -34,10 +34,10 @@ class Encrypt extends Component {
   }
 
   onDecrypt = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     decrypt(this.state.decrypt, (error, result) => {
       if (error) {
-        this.setState(({ decryptResult: 'Nonexistent or has already been deciphered' }));
+        this.setState(({ decryptResult: error }));
       } else {
         this.setState(({ decryptResult: result }));
       }

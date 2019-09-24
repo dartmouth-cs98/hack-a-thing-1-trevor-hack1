@@ -43,7 +43,8 @@ export function decrypt(code, onDone) {
 
   db.fetchKey(hash, (key) => {
     if (!key) {
-      onDone('Does not exist', null);
+      onDone('Nonexistent or has already been deciphered', null);
+      return;
     }
     let decryptedMessage = '';
     for (let i = 0; i < code.length; i += 1) {
