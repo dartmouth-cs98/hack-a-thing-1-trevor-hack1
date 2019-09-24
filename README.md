@@ -21,7 +21,11 @@ Some things that I learned were unnecessarily complex to implement (i.e. pepperi
 I did this by myself
 ## Acknowledgements
 [Youtube Video that inspired project](https://www.youtube.com/watch?v=R5LqOqaBYG8)
+
 [More In Depth Article about topics](https://www.thesslstore.com/blog/difference-encryption-hashing-salting/)
+
 [Rainbow Tables](https://www.lifewire.com/rainbow-tables-your-passwords-worst-nightmare-2487288)
+
 [Salting and Peppering](https://medium.com/@berto168/salt-pepper-spice-up-your-hash-b48328caa2af)
+
 Background picture obtained via pixabay.com
