@@ -13,8 +13,15 @@ Some of the topics that I learned during this assignment include:
     * Rainbow Tables
     * Best Practices for Security
     * Packet Sniffing
+    * AES
     
 ## What didn’t work
 Some things that I learned were unnecessarily complex to implement (i.e. peppering), but there are some things I encountered that were too complex for the small scope of this assignment. One thing that didn't work and I could possibly improve on if I had more time, would be a custom backend. Firebase is great for basic data storage, but with all my sensitive information being handled on the front-end can be dangerous. Additionally, I think if I had more time I could implement a better hashing + salting method to map the encrypted message to its key in the database. 
 ## Who did what 
 I did this by myself
+## Acknowledgements
+[Youtube Video that inspired project](https://www.youtube.com/watch?v=R5LqOqaBYG8)
+[More In Depth Article about topics](https://www.thesslstore.com/blog/difference-encryption-hashing-salting/)
+[Rainbow Tables](https://www.lifewire.com/rainbow-tables-your-passwords-worst-nightmare-2487288)
+[Salting and Peppering](https://medium.com/@berto168/salt-pepper-spice-up-your-hash-b48328caa2af)
+Background picture obtained via pixabay.com
